@@ -46,9 +46,10 @@ urlpatterns = [
     # Output:
     # 1. Status code :[STATUS] = 1 : successful signup
     #    Status code :[STATUS] = 2 : missing data
-    #    Status code : [STATUS] = 3 :
-    # 2. [USER_TOKEN] : User_Token(String, length = 32)
-
+    #    Status code :[STATUS] = 3 : signup failure, try again
+    #    Status code :[STATUS] = 4 : user already exists
+    # 2. [USER_TOKEN]: User_Token(String, length = 32) : optional
+    # 3. [MESSAGE] : optional
 
     url(r'user/signup$', views.signup_user, name='signup_user')
 

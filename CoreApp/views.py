@@ -2,6 +2,7 @@ import json
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from CoreApp.Controllers.LoginControllers import login_controller as login_controller
+from CoreApp.Controllers.LoginControllers import signup_controller as signup_controller
 
 
 def index(request):
@@ -39,4 +40,15 @@ def test_login_user(request):
 
 @csrf_exempt
 def signup_user(request):
-    return None
+    check_user_exists = login_controller.test_login(request)
+    if check_user_exists["STATUS"] is 1:
+        resp = signup_controller.signup_user(request)
+    else:
+        # user already exists
+        resp = {
+            "STATUS": 4,
+            "MESSAGE": "user already exists"
+        }
+
+    return HttpResponse(json.dumps(resp), content_type="application/json", status=200)
+
