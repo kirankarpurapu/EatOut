@@ -2,7 +2,7 @@ import json
 
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
-from CoreApp.Controllers.LoginControllers import controller as controller
+from CoreApp.Controllers.LoginControllers import login_controller as controller
 from CoreApp.Controllers.LoginControllers import post_handler_controller as post_controller
 
 
