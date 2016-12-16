@@ -27,30 +27,21 @@ urlpatterns = [
     # ------------------------------------------
 
     # Input:
-    # 1. [FACEBOOK_ID]
-    # Output:
-    # 1. Status code :[STATUS] = 1 : successful login
-    #    Status code :[STATUS] = 2 : new account needs to be created, pass more details
-    #    Status code :[STATUS] = 3 : missing data
-    # 2. [USER_TOKEN] : User_Token(String, length = 32)
+    # {FACEBOOK_ID, EMAIL_ID, USER_NAME, GENDER}
+    # Output: { status: 101/102/103, user_token: }
+    #    Status code 101 : New User.
+    #    Status code 102 : Existing User
+    #    Status code 103 : Bad Request / Missing Data
 
     url(r'user/test_login$', views.test_login_user, name='test_login_user'),
 
+    # ------------------------------------------
+    # Update Friends List
+    # ------------------------------------------
     # Input:
-    # 1. [FACEBOOK_ID]
-    # 2. [GENDER]
-    # 3. [AGE]
-    # 4. [EMAIL_ID]
-    # 5. [PROFILE_PIC_URL]
-    # 6. [NAME]
-    # Output:
-    # 1. Status code :[STATUS] = 1 : successful signup
-    #    Status code :[STATUS] = 2 : missing data
-    #    Status code :[STATUS] = 3 : signup failure, try again
-    #    Status code :[STATUS] = 4 : user already exists
-    # 2. [USER_TOKEN]: User_Token(String, length = 32) : optional
-    # 3. [MESSAGE] : optional
+    # {USER_TOKEN, [LIST_OF_FRIENDS]}
+    # Output: { status: 101/102/103, user_token: }
 
-    url(r'user/signup$', views.signup_user, name='signup_user')
+    url(r'user/update_friends$', views.update_friends, name='update_friends')
 
 ]

@@ -1,6 +1,6 @@
 import json
-
 from django.shortcuts import render
+from CoreApp.Controllers.DatabaseObjects import userprofile_manage
 
 
 def render_result(request, question_id):
@@ -11,30 +11,25 @@ def render_result(request, question_id):
     # raise Http404("Question does not exist")
     return render(request, 'CoreApp/index.html', context)
 
-
-def check_login(facebook_id):
-    # return 1 if no user, else return token
-    return 1
-
-
 def test_login(request):
     login_response = {}
+
     if request.body:
-        print("got a new post request")
-        received_json_data = json.loads(request.body.decode("utf-8"))
-        print("non empty data")
-        if "FACEBOOK_ID" in received_json_data:
-            login_status = check_login(received_json_data["FACEBOOK_ID"])
-            if login_status == 1:  # no account yet
-                login_response["STATUS"] = 2
-            else:  # an account exists
-                login_response["STATUS"] = 1
-                login_response["USER_TOKEN"] = login_status
+        print("Incoming Login Request")
+        user_profile = json.loads(request.body.decode("utf-8"))
+
+        if "FACEBOOK_ID" in user_profile:
+            login_response = userprofile_manage.check_if_user_exists(user_profile)
+            print("Received response as ",login_response)
+
         else:
-            login_response["STATUS"] = 3
+            login_response["STATUS"] = 103
+            print("Incomplete Data in POST request")
 
     else:
-        login_response["STATUS"] = 3
+        login_response["STATUS"] = 103
+        print("Incomplete Data in POST request")
+
     return login_response
 
 
