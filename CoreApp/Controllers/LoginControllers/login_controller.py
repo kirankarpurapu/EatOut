@@ -1,4 +1,5 @@
 import json
+
 from django.shortcuts import render
 
 
@@ -12,12 +13,8 @@ def render_result(request, question_id):
 
 
 def check_login(facebook_id):
-    # should connect to the db and return 1 if the user already exists and return 2 if it is a new user
+    # return 1 if no user, else return token
     return 1
-
-
-def get_user_token():
-    return "abcdefgh"
 
 
 def test_login(request):
@@ -28,11 +25,11 @@ def test_login(request):
         print("non empty data")
         if "FACEBOOK_ID" in received_json_data:
             login_status = check_login(received_json_data["FACEBOOK_ID"])
-            if login_status == 2:  # no account yet
+            if login_status == 1:  # no account yet
                 login_response["STATUS"] = 2
-            elif login_status == 1:
+            else:  # an account exists
                 login_response["STATUS"] = 1
-                login_response["USER_TOKEN"] = get_user_token()
+                login_response["USER_TOKEN"] = login_status
         else:
             login_response["STATUS"] = 3
 
