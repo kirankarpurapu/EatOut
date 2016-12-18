@@ -11,6 +11,7 @@ def render_result(request, question_id):
     # raise Http404("Question does not exist")
     return render(request, 'CoreApp/index.html', context)
 
+
 def test_login(request):
     login_response = {}
 
@@ -20,7 +21,7 @@ def test_login(request):
 
         if "FACEBOOK_ID" in user_profile:
             login_response = userprofile_manage.check_if_user_exists(user_profile)
-            print("Received response as ",login_response)
+            print("Received response as ", login_response)
 
         else:
             login_response["STATUS"] = 103

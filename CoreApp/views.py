@@ -2,27 +2,7 @@ import json
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from CoreApp.Controllers.LoginControllers import login_controller as login_controller
-
-
-def index(request):
-    return HttpResponse("Welcome to the eatout app")
-
-
-def page1(request):
-    return HttpResponse("this is page 1")
-
-
-def sub_page1(request):
-    return HttpResponse("this is the subpage for page 1")
-
-
-def details(request, question_id):
-    return HttpResponse("You're looking at question %s." % question_id)
-
-
-def results(request, question_id):
-    # return controller.render_result(request, question_id)
-    return HttpResponse("Hello World")
+from CoreApp.Controllers.FriendsListController import modify_friends_list as modify_friends_list_controller
 
 
 @csrf_exempt
@@ -40,4 +20,7 @@ def test_login_user(request):
 
 @csrf_exempt
 def update_friends(request):
-    return None
+    resp = modify_friends_list_controller.modify_friends(request)
+    return HttpResponse(json.dumps(resp), content_type="application/json", status=200)
+
+
