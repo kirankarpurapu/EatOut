@@ -1,10 +1,10 @@
-import json
 import uuid
 from configparser import ConfigParser
 
 import boto3
 from boto3.dynamodb.conditions import Key
 from itsdangerous import URLSafeSerializer
+
 from CoreApp.Controllers.DatabaseObjects.table_objects import user_profile_table
 
 config_secrets = ConfigParser()
@@ -81,6 +81,7 @@ def get_user_id(user_token):
     )
     for i in response['Items']:
         user_id = i["USER_ID"]
+    print("The user id is ", user_id)
 
     return user_id
 
