@@ -3,7 +3,7 @@ from . import views
 
 urlpatterns = [
     # ------------------------------------------
-    # Login urls
+    # User Login
     # ------------------------------------------
 
     # Input:
@@ -29,16 +29,41 @@ urlpatterns = [
     # ----------------------------------------------
     # Input:
     # {USER_TOKEN, [PREFERENCES]}
-    # Output: { status: 301/302}
+    # Output: { status: 301/302/303}
     # 301 : successfully updated the preferences
     # 302 : incorrect user_token
     # 303 : something wrong with the database, try again/incorrect sub-keys in the preference key
-    # PREFERENCES : {LIST_OF_PRIMARY_CUISINES:[],
+    # PREFERENCES : {LIST_OF_PRIMARY_CUISINES:[STRINGS],
     #                PRICE_RANGE : INTEGER,
-    #                LIST_OF_FAVOURITE_ITEMS : [],
-    #                LIST_OF_SECONDARY_CUISINES:[],
+    #                LIST_OF_FAVOURITE_ITEMS : [STRINGS],
+    #                LIST_OF_SECONDARY_CUISINES:[STRINGS],
+    #                MINIMUM_RATING : FLOAT
     # }
 
     url(r'user/update_preference$', views.update_preference, name='update_preference'),
+
+    # ----------------------------------------------
+    # Update Reviews
+    # ----------------------------------------------
+    # Input:
+    # {USER_TOKEN, [REVIEWS]}
+    # Output: { status: 401/402/403}
+    # 401 : successfully updated the reviews
+    # 402 : incorrect user_token
+    # 403 : something wrong with the database, try again/incorrect sub-keys in the reviews key
+    # REVIEWS : { RESTAURANT_ID (you get it from the event creation API),
+    #                OVERALL_RESTAURANT_RATING : 1,2 or 3 (like, dislike or neutral),
+    #                OVERALL_RESTAURANT_REVIEW : STRING,
+    #                ITEMS : (list of items)[
+    #                      { ITEM_NAME : STRING,
+    #                      ITEM_RATING : 1,2 or 3 (like, dislike or neutral),
+    #                      ITEM_REVIEW : STRING},
+    #
+    #                      { ITEM_NAME : STRING,
+    #                      ITEM_RATING : 1,2 or 3 (like, dislike or neutral),
+    #                      ITEM_REVIEW : STRING} ...
+    #                ]
+    # }
+    url(r'user/update_reviews$', views.update_reviews, name='update_reviews'),
 
 ]

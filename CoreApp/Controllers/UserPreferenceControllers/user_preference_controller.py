@@ -38,6 +38,7 @@ def update_user_preference(request):
         if user_id == 0:
             print("invalid user token while updating preferences")
             update_user_preference_response["STATUS"] = 302
+            return update_user_preference_response
         else:
             if "PREFERENCES" in request_body:
                 print("updating preferences of ", user_id)
@@ -45,12 +46,15 @@ def update_user_preference(request):
                 update_status = update_preference(user_id, user_preferences)
                 if update_status:
                     update_user_preference_response["STATUS"] = 301
+                    return update_user_preference_response
                 else:
                     update_user_preference_response["STATUS"] = 303
+                    return update_user_preference_response
             else:
                 update_user_preference_response["STATUS"] = 302
+                return update_user_preference_response
 
     else:
         update_user_preference_response["STATUS"] = 302
+        return update_user_preference_response
 
-    return update_user_preference_response
