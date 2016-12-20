@@ -6,5 +6,6 @@ user_profile_table = dynamo_db.Table('UserProfileTable')
 user_friend_table = dynamo_db.Table('UserFriendTable')
 user_preference_table = dynamo_db.Table('UserPreferenceTable')
 user_review_table = dynamo_db.Table('UserReviewTable')
+restaurant_review_table = dynamo_db.Table('RestaurantReviewTable')
 
 print("DynamoDB Connection Successful")

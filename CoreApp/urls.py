@@ -18,6 +18,7 @@ urlpatterns = [
     # ------------------------------------------
     # Update Friends List
     # ------------------------------------------
+
     # Input:
     # {USER_TOKEN, [LIST_OF_FRIENDS_FACEBOOK_IDS]}
     # Output: { status: 201/202}
@@ -27,6 +28,7 @@ urlpatterns = [
     # ----------------------------------------------
     # Update Preferences
     # ----------------------------------------------
+
     # Input:
     # {USER_TOKEN, [PREFERENCES]}
     # Output: { status: 301/302/303}
@@ -45,6 +47,7 @@ urlpatterns = [
     # ----------------------------------------------
     # Update Reviews
     # ----------------------------------------------
+
     # Input:
     # {USER_TOKEN, [REVIEWS]}
     # Output: { status: 401/402/403}
@@ -69,12 +72,26 @@ urlpatterns = [
     # ----------------------------------------------
     # get cuisines
     # ----------------------------------------------
+
     # Input:
     # {USER_TOKEN}
     # Output: { STATUS: 501/502 (success/ incorrect user token),
-    #  LIST_OF_CUISINES : [list of cuisines]
+    # LIST_OF_CUISINES : [list of cuisines]
     # }
 
     url(r'restaurant/get_cuisines', views.get_cuisines, name='ger_cuisines'),
+
+
+    # # ----------------------------------------------
+    # #  update restaurant review
+    # # ----------------------------------------------
+    #
+    # #  Input:
+    # #  {USER_TOKEN, REVIEW}
+    # #  Output: { STATUS: 601/602/603
+    # #  (successfully updated / incorrect/missing user token / malicious/missing data in the request body),
+    # #  }
+    #
+    # url(r'restaurant/update_review$', views.update_restaurant_review, name='update_restaurant_review'),
 
 ]

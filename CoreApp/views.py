@@ -43,3 +43,9 @@ def update_reviews(request):
 def get_cuisines(request):
     resp = restaurant_controller.get_cuisines(request)
     return HttpResponse(json.dumps(resp), content_type="application/json", status=200)
+
+
+    # @csrf_exempt
+    # def update_restaurant_review(request):
+    #     resp = restaurant_controller.update_restaurant_review(request)
+    #     return HttpResponse(json.dumps(resp), content_type="application/json", status=200)
