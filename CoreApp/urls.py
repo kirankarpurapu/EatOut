@@ -66,4 +66,15 @@ urlpatterns = [
     # }
     url(r'user/update_reviews$', views.update_reviews, name='update_reviews'),
 
+    # ----------------------------------------------
+    # get cuisines
+    # ----------------------------------------------
+    # Input:
+    # {USER_TOKEN}
+    # Output: { STATUS: 501/502 (success/ incorrect user token),
+    #  LIST_OF_CUISINES : [list of cuisines]
+    # }
+
+    url(r'restaurant/get_cuisines', views.get_cuisines, name='ger_cuisines'),
+
 ]

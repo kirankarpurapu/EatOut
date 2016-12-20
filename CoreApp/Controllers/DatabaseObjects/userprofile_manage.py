@@ -23,7 +23,6 @@ def check_if_user_exists(user_profile):
             'EMAIL_ID': email_id
         }
     )
-
     result = {
         'status': '',
         'user_token': ''

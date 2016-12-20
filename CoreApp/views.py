@@ -5,6 +5,7 @@ from CoreApp.Controllers.LoginControllers import login_controller as login_contr
 from CoreApp.Controllers.FriendsListControllers import modify_friends_list as modify_friends_list_controller
 from CoreApp.Controllers.UserPreferenceControllers import user_preference_controller as user_preference_controller
 from CoreApp.Controllers.UserReviewControllers import user_review_controller as user_review_controller
+from CoreApp.Controllers.RestaurantControllers import restaurant_controller as restaurant_controller
 
 
 @csrf_exempt
@@ -35,4 +36,10 @@ def update_preference(request):
 @csrf_exempt
 def update_reviews(request):
     resp = user_review_controller.update_review_for_user(request)
+    return HttpResponse(json.dumps(resp), content_type="application/json", status=200)
+
+
+@csrf_exempt
+def get_cuisines(request):
+    resp = restaurant_controller.get_cuisines(request)
     return HttpResponse(json.dumps(resp), content_type="application/json", status=200)
